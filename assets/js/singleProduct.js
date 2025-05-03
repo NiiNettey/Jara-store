@@ -23,7 +23,7 @@ $(document).ready(function () {
       }).showToast();
     } else {
       $.post(
-        "http://javv.x10.mx/backend/addToCart.php",
+        "https://javv.x10.mx/backend/addToCart.php",
         {
           requestData: productId,
           userId: user,
@@ -42,11 +42,11 @@ $(document).ready(function () {
               onClick: function () {}, // Callback after click
             }).showToast();
             $(".dropdown-cart-products").load(
-              "http://javv.x10.mx/backend/getCartItems.php",
+              "https://javv.x10.mx/backend/getCartItems.php",
               { userId: user }
             );
             $(".cart-total-price").load(
-              "http://javv.x10.mx/backend/getTotal.php",
+              "https://javv.x10.mx/backend/getTotal.php",
               { userId: user },
               function (data) {
                 let parts = data.split("/");
@@ -56,11 +56,11 @@ $(document).ready(function () {
             );
           } else if (data == "increase") {
             $(".dropdown-cart-products").load(
-              "http://javv.x10.mx/backend/getCartItems.php",
+              "https://javv.x10.mx/backend/getCartItems.php",
               { userId: user }
             );
             $(".cart-total-price").load(
-              "http://javv.x10.mx/backend/getTotal.php",
+              "https://javv.x10.mx/backend/getTotal.php",
               { userId: user },
               function (data) {
                 let parts = data.split("/");
@@ -87,7 +87,7 @@ $(document).ready(function () {
 
   function loadProduct() {
     $.get(
-      "http://javv.x10.mx/backend/singleProduct.php",
+      "https://javv.x10.mx/backend/singleProduct.php",
       { product_id: productId },
       function (data) {
         if (!data || data.length === 0) {

@@ -4,7 +4,7 @@ $(document).ready(function () {
   const cat = urlParams.get("cat");
   function loadProducts() {
     $.get(
-      "http://javv.x10.mx/backend/getCategory.php",
+      "https://javv.x10.mx/backend/getCategory.php",
       { product_cat: cat },
       function (data) {
         if (!data || data.length === 0) {

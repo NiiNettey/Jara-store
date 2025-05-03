@@ -1,9 +1,9 @@
 $(document).ready(function () {
   let user = getCookie("user");
   let bizz = getCookie("bizz");
-  
+
   $.ajax({
-    url: "http://javv.x10.mx/backend/getAccount.php",
+    url: "https://javv.x10.mx/backend/getAccount.php",
     type: "GET",
     dataType: "json",
     data: { userId: user, bizzId: bizz },
@@ -28,7 +28,7 @@ $(document).ready(function () {
     e.preventDefault();
 
     $.post(
-      "http://javv.x10.mx/backend/update_profile.php",
+      "https://javv.x10.mx/backend/update_profile.php",
       {
         firstName: $("#firstName").val(),
         email: $("#email").val(),
@@ -37,7 +37,7 @@ $(document).ready(function () {
         zip: $("#zipCode").val(),
         phone: $("#phoneNumber").val(),
         userId: user,
-        bizzId: bizz
+        bizzId: bizz,
       },
       function (data, status) {
         if (data == "update") {
@@ -59,7 +59,7 @@ $(document).ready(function () {
   });
 
   $.ajax({
-    url: "http://javv.x10.mx/backend/getOrders.php",
+    url: "https://javv.x10.mx/backend/getOrders.php",
     method: "GET",
     dataType: "json",
     data: { userId: user, bizzId: bizz },
@@ -137,12 +137,12 @@ $(document).ready(function () {
         e.preventDefault();
         const orderId = $(this).data("id");
         $.post(
-          "http://javv.x10.mx/backend/getOrders.php",
+          "https://javv.x10.mx/backend/getOrders.php",
           {
             doneDeal: orderId,
             doneOrdd: "doneOrdd",
             userId: user,
-            bizzId: bizz 
+            bizzId: bizz,
           },
           function (data, status) {
             if (data == "complete") {

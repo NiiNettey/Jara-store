@@ -3,7 +3,7 @@ $(document).ready(function () {
 
   function updateCartUI(keepDropdownOpen = false) {
     $(".cart-total-price").load(
-      "http://javv.x10.mx/backend/getTotal.php",
+      "https://javv.x10.mx/backend/getTotal.php",
       { userId: user },
       function (data) {
         let parts = data.split("/");
@@ -13,8 +13,8 @@ $(document).ready(function () {
     );
 
     $(".dropdown-cart-products").load(
-      "http://javv.x10.mx/backend/getCartItems.php",
-      { userId: user }, 
+      "https://javv.x10.mx/backend/getCartItems.php",
+      { userId: user },
       function () {
         if (keepDropdownOpen) {
           $(".cart-dropdown").addClass("show");
@@ -73,7 +73,7 @@ $(document).ready(function () {
       if (isDecrease) requestData.decrease = true;
 
       handleCartAction(
-        "http://javv.x10.mx/backend/addToCart.php",
+        "https://javv.x10.mx/backend/addToCart.php",
         requestData,
         function (action) {
           let newQty = action === "increase" ? currentQty + 1 : currentQty - 1;
@@ -86,7 +86,7 @@ $(document).ready(function () {
 
   function removeItemFromCart(productId) {
     $.post(
-      "http://javv.x10.mx/backend/removeFromCart.php",
+      "https://javv.x10.mx/backend/removeFromCart.php",
       { product_id: productId },
       function (response) {
         if (response === "removed") {
@@ -105,7 +105,7 @@ $(document).ready(function () {
     if (!productId) return console.error("No product ID found.");
 
     handleCartAction(
-      "http://javv.x10.mx/backend/removeFromCart.php",
+      "https://javv.x10.mx/backend/removeFromCart.php",
       { product_id: productId },
       () => {}
     );

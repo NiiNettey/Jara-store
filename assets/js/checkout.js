@@ -3,7 +3,7 @@ $(document).ready(function () {
   user = getCookie("user");
   function loadCheckoutCart() {
     $.ajax({
-      url: "http://javv.x10.mx/backend/checkout.php",
+      url: "https://javv.x10.mx/backend/checkout.php",
       type: "GET",
       dataType: "json",
       data: { userId: user },
@@ -71,7 +71,7 @@ $(document).ready(function () {
     }
 
     $.post(
-      "http://javv.x10.mx/backend/removeFromCart.php",
+      "https://javv.x10.mx/backend/removeFromCart.php",
       { product_id: productId },
       function (response) {
         if (response === "removed") {
@@ -91,7 +91,7 @@ $(document).ready(function () {
           });
 
           $(".cart-count").load(
-            "http://javv.x10.mx/backend/getTotal.php",
+            "https://javv.x10.mx/backend/getTotal.php",
             { userId: user },
             function (data) {
               let parts = data.split("/");
@@ -108,7 +108,7 @@ $(document).ready(function () {
   });
 
   $.ajax({
-    url: "http://javv.x10.mx/backend/getAccount.php",
+    url: "https://javv.x10.mx/backend/getAccount.php",
     type: "GET",
     dataType: "json",
     data: { userId: user },
@@ -144,7 +144,7 @@ $(document).ready(function () {
     console.log(phone);
 
     $.post(
-      "http://javv.x10.mx/backend/order.php",
+      "https://javv.x10.mx/backend/order.php",
       {
         username: username,
         street_add: street_add,

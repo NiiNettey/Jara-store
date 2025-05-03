@@ -1,6 +1,6 @@
 $(document).ready(function () {
   $.ajax({
-    url: "http://javv.x10.mx/backend/getShops.php",
+    url: "https://javv.x10.mx/backend/getShops.php",
     method: "GET",
     dataType: "json",
     success: function (response) {

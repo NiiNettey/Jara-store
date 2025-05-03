@@ -45,7 +45,7 @@ $(document).ready(function () {
     var pass = $("#pass").val();
 
     $.post(
-      "http://javv.x10.mx/backend/signup.php",
+      "https://javv.x10.mx/backend/signup.php",
       {
         fname: fname,
         aType: aType,
@@ -53,6 +53,7 @@ $(document).ready(function () {
         pass: pass,
       },
       function (data, status) {
+        data=$.trim(data);
         let inf = data.split("/");
         $("#loading-btn").hide();
         $("#Create").show();
@@ -71,8 +72,8 @@ $(document).ready(function () {
             },
             onClick: function () {}, // Callback after click
           }).showToast();
-          var email = $("#email").val("");
-          var pass = $("#pass").val("");
+          $("#email").val("");
+          $("#pass").val("");
         } else if (inf[0] == "bizz") {
           setCookie("bizz", inf[1], 7);
           window.location.href = "/pages/account.html";
@@ -90,23 +91,24 @@ $(document).ready(function () {
 
   //login
   $("#login-form").submit(function (e) {
-    $('#loginBtn').prop('disabled', true);
-    $('#loginBtn').html('...');
+    $("#loginBtn").prop("disabled", true);
+    $("#loginBtn").html("...");
     e.preventDefault();
     var email = $("#emailL").val();
     var pass = $("#passL").val();
 
     $.ajax({
-      url: "http://javv.x10.mx/backend/login.php",
+      url: "https://javv.x10.mx/backend/login.php",
       method: "POST",
       data: {
         email: email,
         pass: pass,
       },
       xhrFields: {
-        withCredentials: true, // <- THIS IS VERY IMPORTANT
+        withCredentials: true,
       },
       success: function (data) {
+        data=$.trim(data);
         let inf = data.split("/");
         if (inf[0] == "Login") {
           setCookie("user", inf[1], 7);
@@ -127,6 +129,9 @@ $(document).ready(function () {
         } else if (data == 1) {
           window.location.href = "/pages/admin.html?apex=" + data;
         } else {
+          let inf = data.split("/");
+          console.log(inf[0]);
+
           Toastify({
             text: "Could not find any account linked to this email",
             duration: 3000,

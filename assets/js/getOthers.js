@@ -1,6 +1,6 @@
 $(document).ready(function () {
   function loadOtherProducts() {
-    $.get("http://javv.x10.mx/backend/getOthers.php", function (data) {
+    $.get("https://javv.x10.mx/backend/getOthers.php", function (data) {
       if (!data || data.length === 0) {
         console.error("No products received.");
         return;

@@ -1,6 +1,6 @@
 $(document).ready(function () {
   function loadElectronicsProducts() {
-    $.get("http://javv.x10.mx/backend/getElectronics.php", function (data) {
+    $.get("https://javv.x10.mx/backend/getElectronics.php", function (data) {
       if (!data || data.length === 0) {
         console.error("No products received.");
         return;
