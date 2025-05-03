@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Details</title>
+    <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/store/style.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f8f8;
+      }
+      .box {
+        max-width: 1200px;
+        margin: 10px auto; /* Reduce margin */
+        padding: 15px; /* Reduce padding */
+        display: flex;
+        flex-wrap: wrap;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        justify-content: space-between;
+      }
+
+      .product-image-box {
+        flex: 1;
+        text-align: center;
+        min-width: 280px; /* Slightly smaller */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .product-image-box img {
+        max-width: 400px; /* Reduce image size */
+      }
+      .thumbnail-box {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        gap: 10px;
+      }
+      .thumbnail {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        cursor: pointer;
+        border: 2px solid transparent;
+        border-radius: 5px;
+      }
+      .thumbnail:hover,
+      .thumbnail.active {
+        border-color: #007bff;
+      }
+      .product-details {
+        flex: 1;
+        padding-left: 30px;
+        min-width: 300px;
+      }
+
+      .price {
+        font-size: 22px;
+        color: #d9534f;
+        margin: 10px 0;
+      }
+      .product-meta p {
+        margin: 5px 0;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      select,
+      input[type="number"] {
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+      }
+      .buy-now,
+      .add-to-cart {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .buy-now {
+        background: #f0ad4e;
+      }
+      .buy-now:hover {
+        background: #ec971f;
+      }
+      .add-to-cart:hover {
+        background: #0056b3;
+      }
+      @media (max-width: 768px) {
+        .box {
+          flex-direction: column;
+          align-items: center;
+        }
+        .product-details {
+          padding-left: 0;
+          text-align: center;
+        }
+        .actions {
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <header
+        class="header header-10 header-intro-clearance"
+        style="position: sticky; top: 0; z-index: 10000"
+      >
+        <div class="header-middle">
+          <div class="container">
+            <div class="header-left">
+              <a href="index.html" class="logo">
+                <img
+                  src="/assets/images/logo.jpg"
+                  alt="Store logo"
+                  width="105"
+                  height="25"
+                />
+              </a>
+            </div>
+
+            <div class="header-right">
+              <div class="header-dropdown-link">
+                <a href="/" class="wishlist-link">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M12.5812 2.68627C12.2335 2.43791 11.7664 2.43791 11.4187 2.68627L1.9187 9.47198L3.08118 11.0994L11.9999 4.7289L20.9187 11.0994L22.0812 9.47198L12.5812 2.68627ZM19.5812 12.6863L12.5812 7.68627C12.2335 7.43791 11.7664 7.43791 11.4187 7.68627L4.4187 12.6863C4.15591 12.874 3.99994 13.177 3.99994 13.5V20C3.99994 20.5523 4.44765 21 4.99994 21H18.9999C19.5522 21 19.9999 20.5523 19.9999 20V13.5C19.9999 13.177 19.844 12.874 19.5812 12.6863ZM5.99994 19V14.0146L11.9999 9.7289L17.9999 14.0146V19H5.99994Z"
+                    ></path>
+                  </svg>
+
+                  <span class="wishlist-txt">Home</span>
+                </a>
+                <a href="" class="wishlist-link wishlist-link-login">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                    fill="currentColor"
+                  >
+                    <path
+                      d="M11.9999 17C15.6623 17 18.8649 18.5751 20.607 20.9247L18.765 21.796C17.3473 20.1157 14.8473 19 11.9999 19C9.15248 19 6.65252 20.1157 5.23479 21.796L3.39355 20.9238C5.13576 18.5747 8.33796 17 11.9999 17ZM11.9999 2C14.7613 2 16.9999 4.23858 16.9999 7V10C16.9999 12.6888 14.8776 14.8818 12.2168 14.9954L11.9999 15C9.23847 15 6.9999 12.7614 6.9999 10V7C6.9999 4.31125 9.1222 2.11818 11.783 2.00462L11.9999 2ZM11.9999 4C10.4022 4 9.09623 5.24892 9.00499 6.82373L8.9999 7V10C8.9999 11.6569 10.343 13 11.9999 13C13.5976 13 14.9036 11.7511 14.9948 10.1763L14.9999 10V7C14.9999 5.34315 13.6567 4 11.9999 4Z"
+                    ></path>
+                  </svg>
+
+                  <span class="user-txt"></span>
+                </a>
+
+                <div class="dropdown cart-dropdown">
+                  <a
+                    href="#"
+                    class="dropdown-toggle"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    data-display="static"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      width="24"
+                      height="24"
+                      fill="currentColor"
+                    >
+                      <path
+                        d="M12.0049 2C15.3186 2 18.0049 4.68629 18.0049 8V9H22.0049V11H20.8379L20.0813 20.083C20.0381 20.6013 19.6048 21 19.0847 21H4.92502C4.40493 21 3.97166 20.6013 3.92847 20.083L3.17088 11H2.00488V9H6.00488V8C6.00488 4.68629 8.69117 2 12.0049 2ZM18.8309 11H5.17788L5.84488 19H18.1639L18.8309 11ZM13.0049 13V17H11.0049V13H13.0049ZM9.00488 13V17H7.00488V13H9.00488ZM17.0049 13V17H15.0049V13H17.0049ZM12.0049 4C9.86269 4 8.1138 5.68397 8.00978 7.80036L8.00488 8V9H16.0049V8C16.0049 5.8578 14.3209 4.10892 12.2045 4.0049L12.0049 4Z"
+                      ></path>
+                    </svg>
+
+                    <span class="cart-count"></span>
+                    <div style="display: flex">
+                      <span class="cart-txt">Cart</span>
+                    </div>
+                  </a>
+
+                  <div class="dropdown-menu dropdown-menu-right">
+                    <div class="dropdown-cart-products"></div>
+
+                    <div class="dropdown-cart-total">
+                      <span>Total</span>
+
+                      <span class="cart-total-price"></span>
+                    </div>
+
+                    <div class="dropdown-cart-action">
+                      <a
+                        href="/pages/checkout.html"
+                        class="btn btn-outline-primary-2"
+                        ><span>Checkout</span></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </div>
+    <div class="box"></div>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/getCartItems.js"></script>
+    <script src="/assets/js/getTotal.js"></script>
+    <script src="/assets/js/getSess.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/singleProduct.js"></script>
+    <script src="/assets/js/moime.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script>
+      const thumbnails = document.querySelectorAll(".thumbnail");
+      const mainImage = document.getElementById("main-image");
+
+      thumbnails.forEach((thumbnail) => {
+        thumbnail.addEventListener("click", function () {
+          thumbnails.forEach((thumb) => thumb.classList.remove("active"));
+          this.classList.add("active");
+          mainImage.src = this.src.replace("?w=60", "");
+        });
+      });
+    </script>
+  </body>
+</html>

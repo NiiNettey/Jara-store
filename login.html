@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Store Login Page</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <link
+      id="pagestyle"
+      href="/assets/css/login.css?v=2.1.0"
+      rel="stylesheet"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body class="">
+    <main class="main-content mt-0">
+      <div
+        class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
+        style="
+          background-image: url('/assets/img/zzz.png');
+          background-position: top;
+        "
+      >
+        <span class="mask bg-gradient-dark opacity-6"></span>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-5 text-center mx-auto">
+              <h1 class="text-white mb-2 mt-5">Welcome To Jara</h1>
+              <p class="text-lead text-white">
+                Connect Globally with sellers and buyers
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+          <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+            <div class="card z-index-0" id="signup">
+              <div class="card-header text-center pt-4">
+                <h5>Create Account</h5>
+              </div>
+              <div class="card-body">
+                <form action="#" id="Create-form">
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      id="fname"
+                      class="form-control"
+                      placeholder="Name"
+                      aria-label="Email"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <input
+                      type="text"
+                      id="email"
+                      class="form-control"
+                      placeholder="Email/number"
+                      aria-label="Email"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <input
+                      type="password"
+                      id="pass"
+                      class="form-control"
+                      placeholder="Password"
+                      aria-label="Password"
+                      required
+                    />
+                  </div>
+                  <select class="form-control" id="aType" required>
+                    <option value="" disabled selected>
+                      Select Account Type
+                    </option>
+                    <option value="business">Business Account</option>
+                    <option value="consumer">Consumer Account</option>
+                  </select>
+                  <div class="text-center">
+                    <button
+                      id="Create"
+                      type="submit"
+                      class="btn bg-gradient-dark w-100 my-4 mb-2"
+                    >
+                      Sign up
+                    </button>
+                    <div id="loading-btn">
+                      <video
+                        src="/assets/images/loading.webm"
+                        autoplay
+                        loop
+                        muted
+                      ></video>
+                    </div>
+                  </div>
+                  <p class="text-sm mt-3 mb-0">
+                    Already have an account?
+                    <a
+                      href="javascript:;"
+                      class="text-dark font-weight-bolder"
+                      id="loginForm"
+                      >Sign in</a
+                    >
+                  </p>
+                </form>
+              </div>
+            </div>
+
+            <div class="card z-index-0" id="login">
+              <div class="card-header text-center pt-4">
+                <h5>Login</h5>
+              </div>
+              <div class="card-body">
+                <form action="#" id="login-form">
+                  <div class="mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      placeholder="Email/number"
+                      aria-label="Email"
+                      id="emailL"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <input
+                      type="password"
+                      class="form-control"
+                      placeholder="Password"
+                      aria-label="Password"
+                      id="passL"
+                      required
+                    />
+                  </div>
+
+                  <div class="text-center">
+                    <button
+                      type="submit"
+                      class="btn bg-gradient-dark w-100 my-4 mb-2"
+                      id="loginBtn"
+                    >
+                      Sign in
+                    </button>
+                    <a href="#" class="forgot">Forgot password?</a>
+                  </div>
+                  <p class="text-sm mt-3 mb-0">
+                    Not having an account?
+                    <a
+                      href="javascript:;"
+                      class="text-dark font-weight-bolder"
+                      id="CreateForm"
+                      >Sign up</a
+                    >
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script src="/assets/js/moime.js"></script>
+  </body>
+</html>
