@@ -247,11 +247,19 @@
               min="1"
               required
             />
+            <input
+              type="hidden"
+              id="seller_products"
+              name="seller_products"
+              placeholder="products"
+              
+            />
             <label for="product_category">Product Category:</label>
             <select id="product_category" name="product_category" required>
               <option value="Electronics">Electronics</option>
               <option value="Fashion">Fashion</option>
-              <option value="Home">Home</option>
+              <option value="Health">Health & Beauty</option>
+              <option value="Food">Food & Groceries</option>
             </select>
           </fieldset>
           <button>Add Product</button>
@@ -283,28 +291,37 @@
       });
     </script>
     <script>
-      $(document).ready(function () {
-        $("#productForm").on("submit", function (e) {
-          e.preventDefault();
+$(document).ready(function () {
+  let seller = getCookie("bizz");
+  $("#seller_products").val(seller);
 
-          var formData = new FormData(this);
+  $("#productForm").on("submit", function (e) {
+    e.preventDefault();
 
-          $.ajax({
-            url: "http://javv.x10.mx/backend/add-product.php",
-            type: "POST",
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (response) {
-              console.log(response);
-              $("#productForm")[0].reset(); // Reset form after submission
-            },
-            error: function () {
-              alert("Something went wrong!");
-            },
-          });
-        });
-      });
+    var formData = new FormData(this);
+
+    $.ajax({
+      url: "https://javv.x10.mx/backend/add-product.php",
+      type: "POST",
+      data: formData,
+      contentType: false,
+      processData: false,
+      dataType: "json", 
+      success: function (response) {
+        if (response.success) {
+          alert(response.message); 
+          $("#productForm")[0].reset();
+        } else {
+          alert("Error: " + response.message); 
+        }
+      },
+      error: function () {
+        alert("Something went wrong!");
+      },
+    });
+  });
+});
+
     </script>
     <script src="/assets/js/getSess.js"></script>
     <script src="/assets/js/moime.js"></script>

@@ -1,6 +1,6 @@
 $(document).ready(function () {
   $.ajax({
-    url: "http://javv.x10.mx/backend/getUsers.php",
+    url: "https://javv.x10.mx/backend/getUsers.php",
     method: "GET",
     dataType: "json",
     success: function (users) {

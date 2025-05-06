@@ -6,6 +6,11 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
     <title>Store Login Page</title>
 
     <link
@@ -30,6 +35,37 @@
   </head>
 
   <body class="">
+    <div
+      style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 999;
+      "
+    >
+      <a href="/">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="28"
+          height="28"
+          fill="black"
+        >
+          <path
+            d="M12.5812 2.68627C12.2335 2.43791 11.7664 2.43791 11.4187 2.68627L1.9187 9.47198L3.08118 11.0994L11.9999 4.7289L20.9187 11.0994L22.0812 9.47198L12.5812 2.68627ZM19.5812 12.6863L12.5812 7.68627C12.2335 7.43791 11.7664 7.43791 11.4187 7.68627L4.4187 12.6863C4.15591 12.874 3.99994 13.177 3.99994 13.5V20C3.99994 20.5523 4.44765 21 4.99994 21H18.9999C19.5522 21 19.9999 20.5523 19.9999 20V13.5C19.9999 13.177 19.844 12.874 19.5812 12.6863ZM5.99994 19V14.0146L11.9999 9.7289L17.9999 14.0146V19H5.99994Z"
+          ></path>
+        </svg>
+      </a>
+    </div>
+
     <main class="main-content mt-0">
       <div
         class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
@@ -39,6 +75,7 @@
         "
       >
         <span class="mask bg-gradient-dark opacity-6"></span>
+
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-lg-5 text-center mx-auto">

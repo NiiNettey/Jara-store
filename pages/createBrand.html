@@ -1,291 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register Shop</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Roboto", sans-serif;
-      }
-      .flex {
+    <title>Store Login Page</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <link
+      id="pagestyle"
+      href="/assets/css/login.css?v=2.1.0"
+      rel="stylesheet"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body class="">
+    <div
+      style="
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
+        background: white;
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         display: flex;
         align-items: center;
-      }
-      .container {
-        padding: 0 15px;
-        min-height: 100vh;
         justify-content: center;
-        background: #f0f2f5;
-      }
-      .store-page {
-        justify-content: space-between;
-        max-width: 1000px;
-        width: 100%;
-      }
-      .store-page .text {
-        margin-bottom: 90px;
-      }
-      .store-page h1 {
-        color: #1877f2;
-        font-size: 4rem;
-        margin-bottom: 10px;
-      }
-      .store-page p {
-        font-size: 1.75rem;
-        white-space: nowrap;
-      }
-      form {
-        display: flex;
-        flex-direction: column;
-        background: #fff;
-        border-radius: 8px;
-        padding: 20px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
-        max-width: 400px;
-        width: 100%;
-      }
-      form input {
-        height: 55px;
-        width: 100%;
-        border: 1px solid #ccc;
-        border-radius: 6px;
-        margin-bottom: 15px;
-        font-size: 1rem;
-        padding: 0 14px;
-      }
-      form input:focus {
-        outline: none;
-        border-color: #1877f2;
-      }
-      ::placeholder {
-        color: #777;
-        font-size: 1.063rem;
-      }
-      .link {
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-      }
-      .link .login {
-        border: none;
-        outline: none;
-        cursor: pointer;
-        background: #1877f2;
-        padding: 15px 0;
-        border-radius: 6px;
-        color: #fff;
-        font-size: 1.25rem;
-        font-weight: 600;
-        transition: 0.2s ease;
-      }
-      .link .login:hover {
-        background: #0d65d9;
-      }
-      form a {
-        text-decoration: none;
-      }
-      .link .forgot {
-        color: #1877f2;
-        font-size: 0.875rem;
-      }
-      .link .forgot:hover {
-        text-decoration: underline;
-      }
-      hr {
-        border: none;
-        height: 1px;
-        background-color: #ccc;
-        margin-bottom: 20px;
-        margin-top: 20px;
-      }
-      .button {
-        margin-top: 25px;
-        text-align: center;
-        margin-bottom: 20px;
-      }
-      .button a {
-        padding: 15px 20px;
-        background: #42b72a;
-        border-radius: 6px;
-        color: #fff;
-        font-size: 1.063rem;
-        font-weight: 600;
-        transition: 0.2s ease;
-      }
-      .button a:hover {
-        background: #3ba626;
-      }
-      @media (max-width: 900px) {
-        .store-page {
-          flex-direction: column;
-          text-align: center;
-        }
-        .store-page .text {
-          margin-bottom: 30px;
-        }
-      }
-      @media (max-width: 460px) {
-        .store-page h1 {
-          font-size: 3.5rem;
-        }
-        .store-page p {
-          font-size: 1.3rem;
-        }
-        form {
-          padding: 15px;
-        }
-      }
-      .pImg-container {
-        position: relative;
-        margin-bottom: 15px;
-      }
+        z-index: 999;
+      "
+    >
+      <a href="/">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          width="28"
+          height="28"
+          fill="black"
+        >
+          <path
+            d="M12.5812 2.68627C12.2335 2.43791 11.7664 2.43791 11.4187 2.68627L1.9187 9.47198L3.08118 11.0994L11.9999 4.7289L20.9187 11.0994L22.0812 9.47198L12.5812 2.68627ZM19.5812 12.6863L12.5812 7.68627C12.2335 7.43791 11.7664 7.43791 11.4187 7.68627L4.4187 12.6863C4.15591 12.874 3.99994 13.177 3.99994 13.5V20C3.99994 20.5523 4.44765 21 4.99994 21H18.9999C19.5522 21 19.9999 20.5523 19.9999 20V13.5C19.9999 13.177 19.844 12.874 19.5812 12.6863ZM5.99994 19V14.0146L11.9999 9.7289L17.9999 14.0146V19H5.99994Z"
+          ></path>
+        </svg>
+      </a>
+    </div>
 
-      .pImg {
-        display: none;
-      }
+    <main class="main-content mt-0">
+      <div
+        class="page-header align-items-start min-vh-50 pt-5 pb-11 m-3 border-radius-lg"
+        style="
+          background-image: url('/assets/img/zzz.png');
+          background-position: top;
+        "
+      >
+        <span class="mask bg-gradient-dark opacity-6"></span>
 
-      .file-label {
-        background-color: #5fcfbc;
-        color: white;
-        padding: 12px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: all 0.3s ease;
-        text-align: center;
-        display: inline-block;
-      }
-
-      .file-label:hover {
-        background-color: #5fcfbc;
-      }
-
-      .file-text {
-        display: block;
-      }
-
-      .file-name {
-        font-size: 14px;
-        color: #555;
-        margin-top: 5px;
-      }
-
-      .pImg:focus + .file-label {
-        border: 2px solid #5fcfbc;
-      }
-
-      .pImg:focus + .file-label .file-text {
-        font-weight: bold;
-      }
-
-      .pImg:valid + .file-label .file-name {
-        color: #333;
-      }
-      .preview-container {
-        margin-top: 15px;
-      }
-
-      .file-preview {
-        display: none;
-        max-width: 100px;
-        max-height: 100px;
-        object-fit: cover;
-        border-radius: 8px;
-        margin-top: 10px;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container flex">
-      <div class="store-page flex">
-        <div class="text">
-          <h1>Personal Shop</h1>
-          <p>Register Your shop for free now</p>
-        </div>
-
-        <form id="Create-form" enctype="multipart/form-data">
-          <input
-            type="text"
-            id="shopName"
-            name="shopName"
-            placeholder="Enter your Shop name"
-            required
-          />
-          <hr />
-          <div
-            class="pImg-container"
-            style="justify-content: center; align-items: center"
-          >
-            <h5>Store Logo</h5>
-            <input type="file" id="pImg" name="shop_image" class="pImg" />
-            <label for="pImg" class="file-label">
-              <span class="file-text">Choose a file</span>
-              <span class="file-name">No file chosen</span>
-            </label>
-            <div class="preview-container">
-              <img
-                id="file-preview"
-                class="file-preview"
-                src=""
-                alt="Preview"
-              />
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-5 text-center mx-auto">
+              <h1 class="text-white mb-2 mt-5">Create a Brand</h1>
+              <p class="text-lead text-white">
+                Create a brand to make customers know who you are
+              </p>
             </div>
           </div>
-          <div class="link">
-            <button type="submit" class="login">Register Shop</button>
-          </div>
-        </form>
+        </div>
       </div>
-    </div>
-    <script>
-      document.getElementById("pImg").addEventListener("change", function () {
-        const fileName =
-          this.files.length > 0 ? this.files[0].name : "No file chosen";
-        const file = this.files[0];
+      <div class="container">
+        <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
+          <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+            <div class="card z-index-0" id="login">
+              <div class="card-header text-center pt-4">
+                <h5>Create brand</h5>
+              </div>
+              <div class="card-body">
+                <form id="Create-form-brand" enctype="multipart/form-data">
+                  <div class="mb-3">
+                    <input
+                      class="form-control"
+                      type="text"
+                      id="shopName"
+                      name="shopName"
+                      placeholder="Enter your Shop name"
+                      required
+                    />
+                    <input
+                      class="form-control"
+                      type="hidden"
+                      id="user"
+                      name="user"
+                      required
+                    />
+                    <hr />
+                    <div
+                      class="pImg-container"
+                      style="justify-content: center; align-items: center"
+                    >
+                      <h5>Store Logo</h5>
+                      <input
+                        type="file"
+                        id="pImg"
+                        name="shop_image"
+                        class="pImg"
+                        required
+                      />
+                    </div>
+                  </div>
 
-        // Update file name
-        document.querySelector(".file-name").textContent = fileName;
-
-        // Display preview if file is an image
-        const filePreview = document.getElementById("file-preview");
-        const reader = new FileReader();
-
-        if (file && file.type.startsWith("image")) {
-          reader.onload = function (e) {
-            filePreview.src = e.target.result;
-            filePreview.style.display = "block"; // Show the image preview
-          };
-
-          reader.readAsDataURL(file);
-        } else {
-          filePreview.style.display = "none"; // Hide the image preview if it's not an image
-        }
-      });
-    </script>
+                  <div class="text-center">
+                    <button
+                      type="submit"
+                      class="btn bg-gradient-dark w-100 my-4 mb-2"
+                    >
+                      Create
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="/assets/js/moime.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
     <script>
       $(document).ready(function () {
-        $("#Create-form").on("submit", function (e) {
+        let bizz = getCookie("bizz");
+        $('#user').val(bizz)
+        $("#Create-form-brand").on("submit", function (e) {
           e.preventDefault();
 
           var formData = new FormData(this);
 
           $.ajax({
-            url: ".http://javv.x10.mx/backend/addShop.php",
+            url: "http://javv.x10.mx/backend/addShop.php",
             type: "POST",
             data: formData,
             contentType: false,
             processData: false,
             success: function (response) {
-              console.log(response);
-              $("#Create-form")[0].reset(); // Reset form after submission
+              data=$.trim(response)
+              if (data=='haveStore') {
+                alert("You already have a store")
+              }else if(data=='alr'){
+                alert("Store name taken...use another")
+              }
+              $("#Create-form-brand")[0].reset(); // Reset form after submission
             },
             error: function () {
               alert("Something went wrong!");

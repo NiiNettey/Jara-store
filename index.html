@@ -57,6 +57,7 @@
     }
   </style>
   <body>
+    
     <div id="toast-container"></div>
 
     <div class="page-wrapper">
@@ -300,12 +301,12 @@
                     </span>
                   </figure>
 
-                  <h3 class="cat-block-title">Fashion</h3>
+                  <h3 class="cat-block-title">Fashion & Apparel</h3>
                 </a>
               </div>
 
               <div class="col-3 col-sm-3 col-lg-3">
-                <a href="/pages/category.html?cat=others" class="cat-block">
+                <a href="/pages/category.html?cat=Health" class="cat-block">
                   <figure>
                     <span>
                       <img
@@ -315,12 +316,12 @@
                     </span>
                   </figure>
 
-                  <h3 class="cat-block-title">Mobile</h3>
+                  <h3 class="cat-block-title">Health and Beauty</h3>
                 </a>
               </div>
 
               <div class="col-3 col-sm-3 col-lg-3">
-                <a href="/pages/category.html?cat=others" class="cat-block">
+                <a href="/pages/category.html?cat=Food" class="cat-block">
                   <figure>
                     <span>
                       <img
@@ -330,7 +331,7 @@
                     </span>
                   </figure>
 
-                  <h3 class="cat-block-title">Chairs</h3>
+                  <h3 class="cat-block-title">Groceries and Food</h3>
                 </a>
               </div>
             </div>
@@ -411,7 +412,7 @@
                   </h3>
 
                   <a href="/pages/createBrand.html" class="banner-link"
-                    >Open A Shop <i class="icon-long-arrow-right"></i
+                    >Register your business <i class="icon-long-arrow-right"></i
                   ></a>
                 </div>
               </div>
@@ -420,7 +421,28 @@
         </div>
 
         <div class="mb-3"></div>
-
+        <div class="container">
+          <h2 class="title title-border mb-5">Shop by Brands</h2>
+          <div
+            id="shop-brands-carousel"
+            class="owl-carousel mb-5 owl-simple"
+            data-toggle="owl"
+            data-owl-options='{
+                  "nav": false, 
+                  "dots": true,
+                  "margin": 30,
+                  "loop": false,
+                  "responsive": {
+                      "0": { "items": 2 },
+                      "420": { "items": 3 },
+                      "600": { "items": 4 },
+                      "900": { "items": 5 },
+                      "1024": { "items": 6 },
+                      "1280": { "items": 6, "nav": true, "dots": false }
+                  }
+              }'
+          ></div>
+        </div>
         <div class="bg-light pt-3 pb-5">
           <div class="container">
             <div class="heading heading-flex heading-border mb-3">
@@ -633,7 +655,7 @@
         <div class="container clothing">
           <div class="heading heading-flex heading-border mb-3">
             <div class="heading-left">
-              <h2 class="title">Others</h2>
+              <h2 class="title">Health and Beauty</h2>
             </div>
           </div>
           <div
@@ -646,7 +668,7 @@
                                 "loop": false,
                                 "responsive": {
                                     "0": {
-                                        "items":1
+                                        "items":2
                                     },
                                     "480": {
                                         "items":2
@@ -667,28 +689,42 @@
         </div>
         <div class="mb-3"></div>
 
-        <div class="container">
-          <h2 class="title title-border mb-5">Shop by Brands</h2>
+        <div class="container Food">
+          <div class="heading heading-flex heading-border mb-3">
+            <div class="heading-left">
+              <h2 class="title">Food & Groceries</h2>
+            </div>
+          </div>
           <div
-            id="shop-brands-carousel"
-            class="owl-carousel mb-5 owl-simple"
+            class="owl-carousel owl-simple carousel-equal-height carousel-with-shadow"
             data-toggle="owl"
             data-owl-options='{
-                  "nav": false, 
-                  "dots": true,
-                  "margin": 30,
-                  "loop": false,
-                  "responsive": {
-                      "0": { "items": 2 },
-                      "420": { "items": 3 },
-                      "600": { "items": 4 },
-                      "900": { "items": 5 },
-                      "1024": { "items": 6 },
-                      "1280": { "items": 6, "nav": true, "dots": false }
+              "nav": false, 
+              "dots": true,
+              "margin": 20,
+              "loop": false,
+              "responsive": {
+                  "0": {
+                      "items":2
+                  },
+                  "480": {
+                      "items":2
+                  },
+                  "768": {
+                      "items":3
+                  },
+                  "992": {
+                      "items":4
+                  },
+                  "1280": {
+                      "items":5,
+                      "nav": true
                   }
-              }'
+              }
+          }'
           ></div>
         </div>
+        <div class="mb-3"></div>
       </main>
 
       <footer class="footer footer-2">
@@ -756,7 +792,8 @@
     <script src="assets/js/getElectronics.js"></script>
     <script src="assets/js/getCartItems.js"></script>
     <script src="assets/js/getFashion.js"></script>
-    <script src="assets/js/getOthers.js"></script>
+    <script src="assets/js/getHealth.js"></script>
+    <script src="assets/js/getFood.js"></script>
     <script src="assets/js/getShops.js"></script>
     <script src="assets/js/moime.js"></script>
     <script src="assets/js/getSess.js"></script>
