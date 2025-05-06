@@ -6,6 +6,7 @@ $(document).ready(function () {
       "https://javv.x10.mx/backend/getTotal.php",
       { userId: user },
       function (data) {
+        data = data.trim();
         let parts = data.split("/");
         $(".cart-total-price").html(parts[1]);
         $(".cart-count").html(parts[0]);
@@ -31,7 +32,7 @@ $(document).ready(function () {
       duration: 3000,
       gravity: "top",
       position: "center",
-      close: true,
+      close: true
     }).showToast();
   }
 
@@ -41,9 +42,10 @@ $(document).ready(function () {
 
   function handleCartAction(url, requestData, successCallback) {
     $.post(url, requestData, function (response) {
+      response = response.trim();
       if (response === "removed") {
         showToast("Item removed from cart");
-        updateCartUI(true); // Keep dropdown open when updating
+        updateCartUI(true);
       } else if (response === "increase") {
         successCallback("increase");
       } else if (response === "decrease") {
@@ -69,7 +71,7 @@ $(document).ready(function () {
     if (isDecrease && currentQty === 1) {
       removeItemFromCart(productId);
     } else {
-      let requestData = { requestData: productId, userId: user }; // <-- Added userId here
+      let requestData = { requestData: productId, userId: user };
       if (isDecrease) requestData.decrease = true;
 
       handleCartAction(
@@ -89,6 +91,7 @@ $(document).ready(function () {
       "https://javv.x10.mx/backend/removeFromCart.php",
       { product_id: productId },
       function (response) {
+        response = response.trim();
         if (response === "removed") {
           showToast("Item removed from cart");
           updateCartUI(true);
@@ -102,12 +105,15 @@ $(document).ready(function () {
     e.stopPropagation();
 
     let productId = $(this).closest(".product").data("id");
-    if (!productId) return console.error("No product ID found.");
+    if (!productId) {
+      console.error("No product ID found.");
+      return;
+    }
 
     handleCartAction(
       "https://javv.x10.mx/backend/removeFromCart.php",
       { product_id: productId },
-      () => {}
+      function () {}
     );
   });
 
@@ -119,6 +125,6 @@ $(document).ready(function () {
     }
   });
 
-  // Initial load: Only update cart, don't force dropdown open
+  // Initial load
   updateCartUI(false);
 });

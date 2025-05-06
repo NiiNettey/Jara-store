@@ -13,9 +13,7 @@ $(document).ready(function () {
           <div class="product" data-product='${JSON.stringify(product)}'>
             <figure class="product-media">
               <div class="svg-image-wrapper">
-                               <svg class="product-svg" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" style="background: white;">
-    <image href="${product.image_path}" width="300" height="300" />
-  </svg>
+  <img src="https://javv.x10.mx${product.image_path}" alt="Product Image" width="300">
               </div>
               <div class="product-action-vertical">
                 <a href="/pages/product.html?product=${

@@ -8,8 +8,8 @@ $(document).ready(function () {
         let storeHTML = "";
         response.forEach(function (store) {
           storeHTML += `
-                        <a href="#" class="brand">
-                            <img src="${store.logo}" alt="${store.name}" />
+                        <a href="/pages/brand.html?brand=${store.name}" class="brand">
+                            <img src="https://javv.x10.mx${store.logo}" alt="${store.name}" />
                         </a>`;
         });
 

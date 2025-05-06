@@ -2,7 +2,7 @@ function getCookie(name) {
   const cookies = document.cookie.split("; ");
   for (const cookie of cookies) {
     const [key, value] = cookie.split("=");
-    if (key === name) return value;
+    if (key === name) return decodeURIComponent(value); // decoding cookie value
   }
   return null;
 }
@@ -47,9 +47,11 @@ $(document).ready(function () {
     if (bizzCookie) {
       $(".header-right").html(`
         <div class="card-body">
-            <button type="button" class="btn btn-primary">
-              Add Store
-            </button>
+
+<a href="/pages/createBrand.html" class="btn btn-primary">
+  Add Store
+</a>
+
         </div>
       `);
       $(".logo img").attr("src", "/assets/images/logo1.png");
@@ -78,7 +80,9 @@ $(document).ready(function () {
             userId: user,
           },
           function (data) {
+            data = $.trim(data); // Trim the response to remove unwanted spaces/newlines
             if (data == "added") {
+              updateCartUI(); // Call to update cart UI
               Toastify({
                 text: "Item added to cart",
                 duration: 3000,
@@ -89,33 +93,8 @@ $(document).ready(function () {
                 stopOnFocus: true,
                 onClick: function () {},
               }).showToast();
-              $(".dropdown-cart-products").load(
-                "https://javv.x10.mx/backend/getCartItems.php",
-                { userId: user }
-              );
-              $(".cart-total-price").load(
-                "https://javv.x10.mx/backend/getTotal.php",
-                { userId: user },
-                function (data) {
-                  let parts = data.split("/");
-                  $(".cart-total-price").html(parts[1]);
-                  $(".cart-count").html(parts[0]);
-                }
-              );
             } else if (data == "increase") {
-              $(".dropdown-cart-products").load(
-                "https://javv.x10.mx/backend/getCartItems.php",
-                { userId: user }
-              );
-              $(".cart-total-price").load(
-                "https://javv.x10.mx/backend/getTotal.php",
-                { userId: user },
-                function (data) {
-                  let parts = data.split("/");
-                  $(".cart-total-price").html(parts[1]);
-                  $(".cart-count").html(parts[0]);
-                }
-              );
+              updateCartUI(); // Call to update cart UI
               Toastify({
                 text: "Item increased",
                 duration: 3000,
@@ -129,6 +108,24 @@ $(document).ready(function () {
             }
           }
         );
+      }
+    );
+  }
+
+  // Utility function to update cart UI
+  function updateCartUI() {
+    $(".dropdown-cart-products").load(
+      "https://javv.x10.mx/backend/getCartItems.php",
+      { userId: user }
+    );
+    $(".cart-total-price").load(
+      "https://javv.x10.mx/backend/getTotal.php",
+      { userId: user },
+      function (data) {
+        data = $.trim(data); // Trim the response to remove unwanted spaces/newlines
+        let parts = data.split("/");
+        $(".cart-total-price").html(parts[1]);
+        $(".cart-count").html(parts[0]);
       }
     );
   }

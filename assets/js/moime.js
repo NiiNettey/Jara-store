@@ -20,6 +20,7 @@ function getCookie(name) {
 function deleteCookie(name) {
   document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`; // Set a past expiration date
 }
+
 $(document).ready(function () {
   $("#signup").hide();
   $("#loading-btn").hide();
@@ -39,10 +40,17 @@ $(document).ready(function () {
     $("#loading-btn").show();
     $("#Create").hide();
     e.preventDefault();
-    var fname = $("#fname").val();
-    var aType = $("#aType").val();
-    var email = $("#email").val();
-    var pass = $("#pass").val();
+    var fname = $("#fname").val().trim();
+    var aType = $("#aType").val().trim();
+    var email = $("#email").val().trim();
+    var pass = $("#pass").val().trim();
+
+    if (!email || !pass || !fname || !aType) {
+      alert("Please fill in all fields");
+      $("#loading-btn").hide();
+      $("#Create").show();
+      return;
+    }
 
     $.post(
       "https://javv.x10.mx/backend/signup.php",
@@ -53,15 +61,14 @@ $(document).ready(function () {
         pass: pass,
       },
       function (data, status) {
-        data=$.trim(data);
+        data = $.trim(data);
         let inf = data.split("/");
         $("#loading-btn").hide();
         $("#Create").show();
-        if (data == "user") {
+        if (data === "user") {
           Toastify({
-            text: "This email exists , Try logging in",
+            text: "This email exists, try logging in.",
             duration: 3000,
-            // destination:
             newWindow: true,
             close: true,
             gravity: "top", // `top` or `bottom`
@@ -74,7 +81,7 @@ $(document).ready(function () {
           }).showToast();
           $("#email").val("");
           $("#pass").val("");
-        } else if (inf[0] == "bizz") {
+        } else if (inf[0] === "bizz") {
           setCookie("bizz", inf[1], 7);
           window.location.href = "/pages/account.html";
         } else {
@@ -94,8 +101,15 @@ $(document).ready(function () {
     $("#loginBtn").prop("disabled", true);
     $("#loginBtn").html("...");
     e.preventDefault();
-    var email = $("#emailL").val();
-    var pass = $("#passL").val();
+    var email = $("#emailL").val().trim();
+    var pass = $("#passL").val().trim();
+
+    if (!email || !pass) {
+      alert("Please fill in all fields");
+      $("#loginBtn").prop("disabled", false);
+      $("#loginBtn").html("Login");
+      return;
+    }
 
     $.ajax({
       url: "https://javv.x10.mx/backend/login.php",
@@ -105,17 +119,17 @@ $(document).ready(function () {
         pass: pass,
       },
       xhrFields: {
-        withCredentials: true,
+        withCredentials: true, // <- THIS IS VERY IMPORTANT
       },
       success: function (data) {
-        data=$.trim(data);
+        data = $.trim(data);
         let inf = data.split("/");
-        if (inf[0] == "Login") {
+        if (inf[0] === "Login") {
           setCookie("user", inf[1], 7);
           window.location.href = "/index.html";
-        } else if (data == "wrngPass") {
+        } else if (data === "wrngPass") {
           Toastify({
-            text: "Wrong Password , Try again",
+            text: "Wrong Password, Try again.",
             duration: 3000,
             close: true,
             gravity: "top",
@@ -123,17 +137,16 @@ $(document).ready(function () {
             stopOnFocus: true,
             style: { background: "#dc3545" },
           }).showToast();
-        } else if (inf[0] == "bizz") {
+          $("#loginBtn").prop("disabled", false);
+          $("#loginBtn").html("Login");
+        } else if (inf[0] === "bizz") {
           setCookie("bizz", inf[1], 7);
           window.location.href = "/pages/account.html?" + data;
         } else if (data == 1) {
           window.location.href = "/pages/admin.html?apex=" + data;
         } else {
-          let inf = data.split("/");
-          console.log(inf[0]);
-
           Toastify({
-            text: "Could not find any account linked to this email",
+            text: "Could not find any account linked to this email.",
             duration: 3000,
             close: true,
             gravity: "top",
@@ -141,6 +154,8 @@ $(document).ready(function () {
             stopOnFocus: true,
             style: { background: "#dc3545" },
           }).showToast();
+          $("#loginBtn").prop("disabled", false);
+          $("#loginBtn").html("Login");
         }
       },
     });

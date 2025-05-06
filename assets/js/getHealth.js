@@ -1,6 +1,6 @@
 $(document).ready(function () {
-  function loadOtherProducts() {
-    $.get("https://javv.x10.mx/backend/getOthers.php", function (data) {
+  function load() {
+    $.get("https://javv.x10.mx/backend/Health.php", function (data) {
       if (!data || data.length === 0) {
         console.error("No products received.");
         return;
@@ -12,9 +12,7 @@ $(document).ready(function () {
           <div class="product" data-product='${JSON.stringify(product)}'>
             <figure class="product-media">
               <div class="svg-image-wrapper">
-                                 <svg class="product-svg" viewBox="0 0 300 300" preserveAspectRatio="xMidYMid slice" style="background: white;">
-    <image href="${product.image_path}" width="300" height="300" />
-  </svg>
+   <img src="https://javv.x10.mx${product.image_path}" alt="Product Image" width="200">
               </div>
               <div class="product-action-vertical">
                 <a href="/pages/product.html?product=${
@@ -22,7 +20,7 @@ $(document).ready(function () {
                 }" class="btn-product-icon btn-wishlist"></a>
               </div>
               <div class="product-action">
-                <a href="#" class="btn-product btn-cart add-to-cart others-cart" title="Add to cart">
+                <a href="#" class="btn-product btn-cart add-to-cart electronics-cart" title="Add to cart">
                   <span>add to cart</span>
                 </a>
               </div>
@@ -41,7 +39,7 @@ $(document).ready(function () {
           </div>`;
       });
 
-      let $carousel = $(".container.clothing .owl-carousel");
+      let $carousel = $(".clothing .owl-carousel");
       $carousel.html(productHTML);
 
       $carousel
@@ -53,7 +51,7 @@ $(document).ready(function () {
           margin: 20,
           loop: false,
           responsive: {
-            0: { items: 1 },
+            0: { items: 2 },
             480: { items: 2 },
             768: { items: 3 },
             992: { items: 4 },
@@ -65,7 +63,7 @@ $(document).ready(function () {
     });
   }
 
-  loadOtherProducts();
+  load();
 
-  $(document).off("click", ".others-cart");
+  $(document).off("click", ".electronics-cart");
 });

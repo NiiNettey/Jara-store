@@ -2,6 +2,7 @@ $(document).ready(function () {
   let user = getCookie("user");
   let bizz = getCookie("bizz");
 
+  // Fetch user account info
   $.ajax({
     url: "https://javv.x10.mx/backend/getAccount.php",
     type: "GET",
@@ -24,6 +25,7 @@ $(document).ready(function () {
     },
   });
 
+  // Update profile
   $("#formAccountSettings").submit(function (e) {
     e.preventDefault();
 
@@ -40,24 +42,24 @@ $(document).ready(function () {
         bizzId: bizz,
       },
       function (data, status) {
-        if (data == "update") {
+        data = data.trim(); // ✅ trim response
+        if (data === "update") {
           Toastify({
             text: "Profile updated",
             duration: 3000,
-            // destination:
             newWindow: true,
             close: true,
-            gravity: "top", // `top` or `bottom`
-            position: "center", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
-            onClick: function () {}, // Callback after click
+            gravity: "top",
+            position: "center",
+            stopOnFocus: true,
+            onClick: function () {},
           }).showToast();
-        } else {
         }
       }
     );
   });
 
+  // Fetch orders
   $.ajax({
     url: "https://javv.x10.mx/backend/getOrders.php",
     method: "GET",
@@ -68,74 +70,54 @@ $(document).ready(function () {
       $tbody.empty();
 
       if (orders.length === 0) {
-        $tbody.append(
-          `<tr><td colspan="7" class="text-center">No orders found.</td></tr>`
-        );
+        $tbody.append(`<tr><td colspan="7" class="text-center">No orders found.</td></tr>`);
         return;
       }
+
       orders.forEach(function (order) {
         const params = new URLSearchParams(window.location.search);
         const alibaba = params.get("apex");
         let row = "";
+
         if (!alibaba) {
           row = `
-          <tr>
-        
-            <td><img src="${
-              order.productImg
-            }" width="50" height="50" style="object-fit: cover;"></td>
-            <td>${order.productName}</td>
-
-            <td>${order.productQuantity}</td>
-            <td class="text-right">GHC ${parseFloat(order.productPrice).toFixed(
-              2
-            )}</td>
-            <td class="text-right">GHC ${parseFloat(
-              order.productPrice * order.productQuantity
-            ).toFixed(2)}</td>
-<td>
-  <a 
-    href="#" 
-    class="complete-order" 
-    data-id="${order.id}" 
-    style="display: inline-block; padding: 6px 12px; background-color: #28a745; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;"
-  >
-    Mark as Complete
-  </a>
-</td>
-          </tr>
-          `;
+            <tr>
+              <td><img src="https://javv.x10.mx${order.productImg}" width="50" height="50" style="object-fit: cover;"></td>
+              <td>${order.productName}</td>
+              <td>${order.productQuantity}</td>
+              <td class="text-right">GHC ${parseFloat(order.productPrice).toFixed(2)}</td>
+              <td class="text-right">GHC ${parseFloat(order.productPrice * order.productQuantity).toFixed(2)}</td>
+              <td>
+                <a href="#" class="complete-order" data-id="${order.id}" 
+                   style="display: inline-block; padding: 6px 12px; background-color: #28a745; color: white; text-decoration: none; border-radius: 4px; font-weight: bold;">
+                  Mark as Complete
+                </a>
+              </td>
+            </tr>`;
         } else {
           row = `
-          <tr>
-
-            <td>
-            <div class="img-container" style="text-align: center;">
-         <img 
-  src="/${order.productImg}" 
-  style="width: 100%; max-width: 100px; height: auto; object-fit: contain; border-radius: 10px;" 
-/>
-
-            </div>
-            </td>
-
-            <td>${order.productName}</td>
-            <td>${order.productQuantity}</td>
-            <td class="text-right">GHC ${parseFloat(order.productPrice).toFixed(
-              2
-            )}</td>
-            <td>${order.usrID}</td>
-            <td><a href="#" class="complete-order" data-id="${
-              order.id
-            }">Order Complete</a></td>
-          </tr>
-        `;
+            <tr>
+              <td>
+                <div class="img-container" style="text-align: center;">
+                  <img src="https://javv.x10.mx${order.productImg}" style="width: 100%; max-width: 100px; height: auto; object-fit: contain; border-radius: 10px;" />
+                </div>
+              </td>
+              <td>${order.productName}</td>
+              <td>${order.productQuantity}</td>
+              <td class="text-right">GHC ${parseFloat(order.productPrice).toFixed(2)}</td>
+              <td>${order.usrID}</td>
+              <td><a href="#" class="complete-order" data-id="${order.id}">Order Complete</a></td>
+            </tr>`;
         }
+
         $tbody.append(row);
       });
+
+      // Mark order complete
       $(document).on("click", ".complete-order", function (e) {
         e.preventDefault();
         const orderId = $(this).data("id");
+
         $.post(
           "https://javv.x10.mx/backend/getOrders.php",
           {
@@ -145,19 +127,18 @@ $(document).ready(function () {
             bizzId: bizz,
           },
           function (data, status) {
-            if (data == "complete") {
+            data = data.trim(); // ✅ trim response
+            if (data === "complete") {
               Toastify({
                 text: "Order marked as complete",
                 duration: 3000,
-                // destination:
                 newWindow: true,
                 close: true,
-                gravity: "top", // `top` or `bottom`
-                position: "center", // `left`, `center` or `right`
-                stopOnFocus: true, // Prevents dismissing of toast on hover
-                onClick: function () {}, // Callback after click
+                gravity: "top",
+                position: "center",
+                stopOnFocus: true,
+                onClick: function () {},
               }).showToast();
-            } else {
             }
           }
         );
@@ -165,11 +146,11 @@ $(document).ready(function () {
     },
     error: function (xhr, status, error) {
       console.error("Error fetching orders:", error);
-      $("table tbody").html(
-        `<tr><td colspan="7" class="text-center text-danger">Failed to load orders.</td></tr>`
-      );
+      $("table tbody").html(`<tr><td colspan="7" class="text-center text-danger">Failed to load orders.</td></tr>`);
     },
   });
+
+  // Logout
   $(document).on("click", ".logout-account", function (e) {
     e.preventDefault();
     deleteCookie("user");

@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  user = getCookie("user");
+  let user = getCookie("user");
   const urlParams = new URLSearchParams(window.location.search);
   const cat = urlParams.get("cat");
   function loadProducts() {
@@ -13,59 +13,69 @@ $(document).ready(function () {
           return;
         }
 
-        let productHTML = `
-            <div class="container">
-     
-                <div class="row" style="margin-bottom:10px">`;
-
+        let productHTML = "";
         data.forEach((product) => {
           productHTML += `
-                <div style="margin-bottom:10px" class="col-6 col-sm-4 col-md-3 col-lg-2"> <!-- 5 items per row on large screens -->
-                    <div class="product" data-product='${JSON.stringify(
-                      product
-                    )}' style="margin-bottom:10px">
-                        <figure class="product-media">
-                            <img src="${product.image_path}" alt="${
-            product.name
-          }" class="product-image"/>
-           <div class="product-action-vertical">
-                               <a href="/pages/product.html?product=${
-                                 product.id
-                               }" class="btn-product-icon btn-wishlist"></a>
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product btn-cart add-to-cart products-cart" title="Add to cart">
-                                    <span>Add to Cart</span>
-                                </a>
-                            </div>
-                        </figure>
-                        <div class="product-body">
-                         <div class="product-cat">
-                              <a href="#">${product.category}</a>
-                          </div>
-                            <h3 class="product-title">
-                                <a href="product.html">${product.name}</a>
-                            </h3>
-                            <div class="product-price">
-                                <span class="new-price">GHc${
-                                  product.price
-                                }</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>`;
+          <div class="product" data-product='${JSON.stringify(product)}'>
+            <figure class="product-media">
+              <div class="svg-image-wrapper">
+  <img src="https://javv.x10.mx${
+    product.image_path
+  }" alt="Product Image" width="300">
+              </div>
+              <div class="product-action-vertical">
+                <a href="/pages/product.html?product=${
+                  product.id
+                }" class="btn-product-icon btn-wishlist"></a>
+              </div>
+              <div class="product-action">
+                <a href="#" class="btn-product btn-cart add-to-cart products-cart" title="Add to cart">
+                  <span>add to cart</span>
+                </a>
+              </div>
+            </figure>
+            <div class="product-body">
+              <div class="product-cat">
+                <a href="#">${product.category}</a>
+              </div>
+              <h3 class="product-title">
+                <a href="product.html">${product.name}</a>
+              </h3>
+              <div class="product-price">
+                <span class="new-price">GHc${product.price}</span>
+              </div>
+            </div>
+          </div>`;
         });
 
-        productHTML += `</div></div>`; // Closing row and container div
+        let $carousel = $("#product_data");
+        $carousel.html(productHTML);
 
-        $("#catgory_data").html(productHTML);
-        $(".title").html(cat + " hot deals");
+        if ($carousel.hasClass("owl-carousel")) {
+          $carousel.owlCarousel("destroy").removeClass("owl-loaded");
+        }
+
+        $carousel.owlCarousel({
+          nav: false,
+          dots: true,
+          margin: 20,
+          loop: false,
+          responsive: {
+            0: { items: 2 },
+            480: { items: 2 },
+            768: { items: 3 },
+            992: { items: 4 },
+            1280: { items: 5, nav: true },
+          },
+        });
       }
     ).fail(function (xhr, status, error) {
       console.error("AJAX Error:", error);
-      $("#catgory_data").html("<p>Error loading products.</p>");
+      $("#product_data").html("<p>Error loading products.</p>");
     });
   }
 
   loadProducts();
+
+  $(document).off("click", ".products-cart");
 });
